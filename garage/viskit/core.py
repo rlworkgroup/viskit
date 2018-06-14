@@ -8,7 +8,7 @@ import pickle
 
 import numpy as np
 
-from rllab.misc import ext
+from garage.misc import ext
 
 
 def unique(l):
@@ -37,8 +37,8 @@ def load_progress(progress_csv_path):
 
 
 def to_json(stub_object):
-    from rllab.misc.instrument import StubObject
-    from rllab.misc.instrument import StubAttr
+    from garage.misc.instrument import StubObject
+    from garage.misc.instrument import StubAttr
     if isinstance(stub_object, StubObject):
         assert len(stub_object.args) == 0
         data = dict()

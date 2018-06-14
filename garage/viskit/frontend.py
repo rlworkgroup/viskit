@@ -11,9 +11,9 @@ import numpy as np
 import plotly.graph_objs as go
 import plotly.offline as po
 
-from rllab.misc import ext
-from rllab.misc.ext import flatten
-from rllab.viskit import core
+from garage.misc import ext
+from garage.misc.ext import flatten
+from garage.viskit import core
 
 matplotlib.use('Agg')
 
@@ -144,9 +144,9 @@ def make_plot_eps(plot_list, use_median=False, counter=0):
             y = list(plt.means)
             y_upper = list(plt.means + plt.stds)
             y_lower = list(plt.means - plt.stds)
-        plt.legend = plt.legend.replace('rllab.algos.trpo.TRPO', 'TRPO')
-        plt.legend = plt.legend.replace('rllab.algos.vpg.VPG', 'REINFORCE')
-        plt.legend = plt.legend.replace('rllab.algos.erwr.ERWR', 'ERWR')
+        plt.legend = plt.legend.replace('garage.algos.trpo.TRPO', 'TRPO')
+        plt.legend = plt.legend.replace('garage.algos.vpg.VPG', 'REINFORCE')
+        plt.legend = plt.legend.replace('garage.algos.erwr.ERWR', 'ERWR')
         plt.legend = plt.legend.replace('sandbox.rein.algos.trpo_vime.TRPO',
                                         'TRPO+VIME')
         plt.legend = plt.legend.replace('sandbox.rein.algos.vpg_vime.VPG',
