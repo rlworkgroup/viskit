@@ -1,0 +1,33 @@
+language: python
+
+python:
+  - "3.5"
+  - "3.6"
+
+git:
+  depth: false
+
+install:
+  - pip install .[all]
+  - pip install .[dev]
+
+script:
+  - scripts/travisci/check_precommit.sh
+  - flake8 --version
+  - flake8 src
+  - flake8 --exclude=src,docs --extend-ignore=D
+  - pytest --cov=viskit
+
+after_script:
+  - coverage xml
+  - bash <(curl -s https://codecov.io/bash)
+
+deploy:
+  provider: pypi
+  user: "${PYPI_USERNAME}"
+  password: "${PYPI_PASSWORD}"
+  on:
+    tags: true
+
+notifications:
+  email: false

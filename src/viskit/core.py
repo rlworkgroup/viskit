@@ -5,7 +5,7 @@ import os
 
 import numpy as np
 
-from garage.misc import ext
+from viskit.misc import ext
 
 
 def unique(l):

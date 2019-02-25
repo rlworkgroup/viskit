@@ -10,9 +10,9 @@ import numpy as np
 import plotly.graph_objs as go
 import plotly.offline as po
 
-from garage.misc import ext
-from garage.misc.ext import flatten
-from garage.viskit import core
+from viskit import core
+from viskit.misc import ext
+from viskit.misc.ext import flatten
 
 matplotlib.use('Agg')
 
