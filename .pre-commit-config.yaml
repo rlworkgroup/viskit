@@ -7,11 +7,6 @@ repos:
         language: script
         entry: scripts/check_commit_message
         stages: [commit-msg]
-    -   id: check-flake8
-        name: Check Flake8
-        language: script
-        entry: scripts/travisci/check_flake8.sh
-        stages: [commit, push]
     -   id: pylint
         name: pylint
         entry: pylint

@@ -40,11 +40,12 @@ setup(
     name='viskit',
     version='0.0.1dev',
     author='Reinforcement Learning Working Group',
-    description=
-        'Hyperparameter dashboard for reinforcement learning experiments',
+    author_email='viskit@noreply.github.com',
+    description=(
+        'Hyperparameter dashboard for reinforcement learning experiments'),
     url='https://github.com/rlworkgroup/viskit',
-    packages=find_packages(where="src"),
-    package_dir={"": "src"},
+    packages=find_packages(where='src'),
+    package_dir={'': 'src'},
     install_requires=required,
     extras_require=extras,
     license=license,

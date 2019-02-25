@@ -17,7 +17,7 @@ def flatten(l):
 
 
 def load_progress(progress_csv_path):
-    print("Reading %s" % progress_csv_path)
+    print('Reading %s' % progress_csv_path)
     entries = dict()
     with open(progress_csv_path, 'r') as csvfile:
         reader = csv.DictReader(csvfile)
@@ -39,7 +39,7 @@ def flatten_dict(d):
         if isinstance(v, dict):
             v = flatten_dict(v)
             for subk, subv in flatten_dict(v).items():
-                flat_params[k + "." + subk] = subv
+                flat_params[k + '.' + subk] = subv
         else:
             flat_params[k] = v
     return flat_params
@@ -48,18 +48,18 @@ def flatten_dict(d):
 def load_params(params_json_path):
     with open(params_json_path, 'r') as f:
         data = json.loads(f.read())
-        if "args_data" in data:
-            del data["args_data"]
-        if "exp_name" not in data:
-            data["exp_name"] = params_json_path.split("/")[-2]
+        if 'args_data' in data:
+            del data['args_data']
+        if 'exp_name' not in data:
+            data['exp_name'] = params_json_path.split('/')[-2]
     return data
 
 
 def lookup(d, keys):
     if not isinstance(keys, list):
-        keys = keys.split(".")
+        keys = keys.split('.')
     for k in keys:
-        if hasattr(d, "__getitem__"):
+        if hasattr(d, '__getitem__'):
             if k in d:
                 d = d[k]
             else:
@@ -77,9 +77,9 @@ def load_exps_data(exp_folder_paths, disable_variant=False):
     for exp in exps:
         try:
             exp_path = exp
-            params_json_path = os.path.join(exp_path, "params.json")
-            variant_json_path = os.path.join(exp_path, "variant.json")
-            progress_csv_path = os.path.join(exp_path, "progress.csv")
+            params_json_path = os.path.join(exp_path, 'params.json')
+            variant_json_path = os.path.join(exp_path, 'variant.json')
+            progress_csv_path = os.path.join(exp_path, 'progress.csv')
             progress = load_progress(progress_csv_path)
             if disable_variant:
                 params = load_params(params_json_path)
@@ -101,15 +101,15 @@ def load_exps_data(exp_folder_paths, disable_variant=False):
 def smart_repr(x):
     if isinstance(x, tuple):
         if x:
-            return "tuple()"
+            return 'tuple()'
         elif len(x) == 1:
-            return "(%s,)" % smart_repr(x[0])
+            return '(%s,)' % smart_repr(x[0])
         else:
-            return "(" + ",".join(map(smart_repr, x)) + ")"
+            return '(' + ','.join(map(smart_repr, x)) + ')'
     else:
-        if hasattr(x, "__call__"):
-            return "__import__('pydoc').locate('%s')" % (
-                x.__module__ + "." + x.__name__)
+        if hasattr(x, '__call__'):
+            return '__import__("pydoc").locate("%s")' % (
+                x.__module__ + '.' + x.__name__)
         else:
             return repr(x)
 
@@ -119,7 +119,7 @@ def extract_distinct_params(exps_data,
                             length=1):
     # all_pairs = unique(flatten([d.flat_params.items() for d in exps_data]))
     # if logger:
-    #     logger("(Excluding {excluded})".format(
+    #     logger('(Excluding {excluded})'.format(
     #       excluded=', '.join(excluded_params)))
     # def cmp(x,y):
     #     if x < y:
@@ -171,11 +171,10 @@ class Selector:
                         self._custom_filters + [filter])
 
     def _check_exp(self, exp):
+        # yapf: disable
         # or exp.flat_params.get(k, None) is None
-        return all(
-            ((str(exp.flat_params.get(k, None)) == str(v) or
-              (k not in exp.flat_params)) for k, v in self._filters)) and all(
-                  custom_filter(exp) for custom_filter in self._custom_filters)
+        return (all(((str(exp.flat_params.get(k, None)) == str(v) or (k not in exp.flat_params)) for k, v in self._filters))  # noqa: E501
+                and all(custom_filter(exp) for custom_filter in self._custom_filters))  # noqa: E501
 
     def extract(self):
         return list(filter(self._check_exp, self._exps_data))
@@ -203,7 +202,7 @@ def hex_to_rgb(hex, opacity=1.0):
     if hex[0] == '#':
         hex = hex[1:]
     assert (len(hex) == 6)
-    return "rgba({0},{1},{2},{3})".format(
+    return 'rgba({0},{1},{2},{3})'.format(
         int(hex[:2], 16), int(hex[2:4], 16), int(hex[4:6], 16), opacity)
 
 
@@ -222,21 +221,21 @@ def hex_to_rgb(hex, opacity=1.0):
 #         self.redraw()
 #
 #     def _init_data(self, exp_folder_path):
-#         self.log("Loading data...")
+#         self.log('Loading data...')
 #         self._exps_data = load_exps_data(exp_folder_path)
-#         self.log("Loaded {nexp} experiments".format(
+#         self.log('Loaded {nexp} experiments'.format(
 #           nexp=len(self._exps_data)))
 #         self._distinct_params = extract_distinct_params(
 #           self._exps_data, logger=self.log)
 #         assert len(self._distinct_params) == 1
 #         self._exp_filter = self._distinct_params[0]
-#         self.log("******************************************")
-#         self.log("Found {nvary} varying parameter{plural}".format(
-#           nvary=len(self._distinct_params), plural="" if len(
-#             self._distinct_params) == 1 else "s"))
+#         self.log('******************************************')
+#         self.log('Found {nvary} varying parameter{plural}'.format(
+#           nvary=len(self._distinct_params), plural='' if len(
+#             self._distinct_params) == 1 else 's'))
 #         for k, v in self._distinct_params:
-#             self.log(k, ':', ", ".join(map(str, v)))
-#         self.log("******************************************")
+#             self.log(k, ':', ', '.join(map(str, v)))
+#         self.log('******************************************')
 #         self._plottable_keys = self._exps_data[0].progress.keys()
 #         assert len(self._plottable_keys) > 0
 #         if 'AverageReturn' in self._plottable_keys:
@@ -258,7 +257,7 @@ def hex_to_rgb(hex, opacity=1.0):
 #         for args, kwargs in self._logs:
 #             print(*args, **kwargs)
 #
-#         self._display_dropdown("_plot_key", self._plottable_keys)
+#         self._display_dropdown('_plot_key', self._plottable_keys)
 #
 #         k, vs = self._exp_filter
 #         selector = Selector(self._exps_data)
@@ -270,9 +269,9 @@ def hex_to_rgb(hex, opacity=1.0):
 #             max_size = max(sizes)
 #             for exp, retlen in zip(filtered_data, sizes):
 #                 if retlen < max_size:
-#                     self.log("Excluding {exp_name} since the
-#                       trajectory is shorter: {thislen} vs. {maxlen}".format(
-#                         exp_name=exp.params["exp_name"],
+#                     self.log('Excluding {exp_name} since the
+#                       trajectory is shorter: {thislen} vs. {maxlen}'.format(
+#                         exp_name=exp.params['exp_name'],
 #                           thislen=retlen, maxlen=max_size))
 #             returns = [ret for ret in returns if len(ret) == max_size]
 #             mean_returns = np.mean(returns, axis=0)
