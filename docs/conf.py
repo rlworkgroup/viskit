@@ -17,6 +17,10 @@ import sys
 
 from recommonmark.parser import CommonMarkParser
 
+# Get __version__ dynamically
+exec(open('../src/viskit/__version__.py').read())
+version_ = __version__  # noqa: undefined-name
+
 # For sphinx-apidoc
 sys.path.insert(0, os.path.abspath('../src/'))
 
@@ -60,9 +64,9 @@ copyright = '2019, Reinforcement Learning Working Group'
 author = 'Reinforcement Learning Working Group'
 
 # The short X.Y version
-version = ''
+version = version_
 # The full version, including alpha/beta/rc tags
-release = '0.0.1-dev'
+release = version_
 
 # -- General configuration ---------------------------------------------------
 

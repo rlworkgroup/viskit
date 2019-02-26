@@ -1,5 +1,3 @@
-import os
-
 from setuptools import find_packages
 from setuptools import setup
 
@@ -42,8 +40,9 @@ with open('README.md') as f:
 with open('LICENSE') as f:
     license = f.read()
 
-# Check for a version tag from TravisCI
-version = os.environ.get('TRAVIS_TAG', DEFAULT_VERSION)
+# Get __version__ dynamically
+exec(open('./src/viskit/__version__.py').read())
+version = __version__  # noqa: undefined-name
 
 setup(
     name='viskit',
