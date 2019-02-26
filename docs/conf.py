@@ -25,8 +25,36 @@ source_parsers = {
     '.md': CommonMarkParser,
 }
 
-# -- Project information -----------------------------------------------------
 
+# Auto-generate API documentation for readthedocs.org
+# See https://github.com/rtfd/readthedocs.org/issues/1139#issuecomment-398083449  # noqa: E501
+def run_apidoc(_):
+    ignore_paths = []
+
+    argv = [
+        '-f',
+        '-T',
+        '-M',
+        '-o', './_apidoc',
+        '../src/'
+    ] + ignore_paths  # yapf: disable
+
+    try:
+        # Sphinx 1.7+
+        from sphinx.ext import apidoc
+        apidoc.main(argv)
+    except ImportError:
+        # Sphinx 1.6 (and earlier)
+        from sphinx import apidoc
+        argv.insert(0, apidoc.__file__)
+        apidoc.main(argv)
+
+
+def setup(app):
+    app.connect('builder-inited', run_apidoc)
+
+
+# -- Project information -----------------------------------------------------
 project = 'viskit'
 copyright = '2019, Reinforcement Learning Working Group'
 author = 'Reinforcement Learning Working Group'
