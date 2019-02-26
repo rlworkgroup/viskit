@@ -1,5 +1,10 @@
+import os
+
 from setuptools import find_packages
 from setuptools import setup
+
+# Update this every release to be 'v{next release number}-dev'
+DEFAULT_VERSION = '0.0.1-dev'
 
 # Required dependencies
 required = [
@@ -36,9 +41,12 @@ with open('README.md') as f:
 with open('LICENSE') as f:
     license = f.read()
 
+# Check for a version tag from TravisCI
+version = os.environ.get('TRAVIS_TAG', DEFAULT_VERSION)
+
 setup(
     name='viskit',
-    version='0.0.1dev',
+    version=version,
     author='Reinforcement Learning Working Group',
     author_email='viskit@noreply.github.com',
     description=(
