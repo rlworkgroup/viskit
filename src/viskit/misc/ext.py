@@ -27,8 +27,15 @@ def flatten(xs):
 
 def compact(x):
     """
-    For a dictionary this removes all None values, and for a list this removes
-    all None elements; otherwise it returns the input itself.
+    Removes all `None` values (for a `dict`), or all `None` elements (for a
+    `list`).
+
+    Args:
+        x (:obj:`dict` or :obj:`list`): The collection from which `None`
+            elements will be removed.
+
+    Returns:
+        A copy of x, with all `None` elements removed.
     """
     if isinstance(x, dict):
         return dict((k, v) for k, v in x.items() if v is not None)
@@ -112,7 +119,7 @@ def concat_paths(p1, p2):
 
 
 def path_len(p):
-    return len(p["states"])
+    return len(p['states'])
 
 
 def shuffled(sequence):
@@ -135,7 +142,7 @@ def set_seed(seed):
     random.seed(seed)
     np.random.seed(seed)
     try:
-        if "tensorflow" in sys.modules:
+        if 'tensorflow' in sys.modules:
             import tensorflow as tf
             tf.set_random_seed(seed)
     except Exception as e:
@@ -150,18 +157,18 @@ def flatten_shape_dim(shape):
     return reduce(operator.mul, shape, 1)
 
 
-def print_lasagne_layer(layer, prefix=""):
-    params = ""
+def print_lasagne_layer(layer, prefix=''):
+    params = ''
     if layer.name:
-        params += ", name=" + layer.name
+        params += ', name=' + layer.name
     if getattr(layer, 'nonlinearity', None):
-        params += ", nonlinearity=" + layer.nonlinearity.__name__
+        params += ', nonlinearity=' + layer.nonlinearity.__name__
     params = params[2:]
-    print(prefix + layer.__class__.__name__ + "[" + params + "]")
+    print(prefix + layer.__class__.__name__ + '[' + params + ']')
     if hasattr(layer, 'input_layers') and layer.input_layers is not None:
-        [print_lasagne_layer(x, prefix + "  ") for x in layer.input_layers]
+        [print_lasagne_layer(x, prefix + '  ') for x in layer.input_layers]
     elif hasattr(layer, 'input_layer') and layer.input_layer is not None:
-        print_lasagne_layer(layer.input_layer, prefix + "  ")
+        print_lasagne_layer(layer.input_layer, prefix + '  ')
 
 
 def sliced_fun(f, n_slices):
