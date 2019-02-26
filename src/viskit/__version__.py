@@ -1,3 +1,4 @@
+"""Automatically resolve the version of this package"""
 import os
 
 # Update this every release to be 'v{next release number}'
