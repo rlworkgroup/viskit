@@ -37,9 +37,6 @@ extras['dev'] = [
 with open('README.md') as f:
     readme = f.read()
 
-with open('LICENSE') as f:
-    license = f.read()
-
 # Get __version__ dynamically
 exec(open('./src/viskit/__version__.py').read())
 version = __version__  # noqa: undefined-name
@@ -56,8 +53,9 @@ setup(
     package_dir={'': 'src'},
     install_requires=required,
     extras_require=extras,
-    license=license,
+    license='MIT',
     long_description=readme,
+    long_description_content_type='text/markdown',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
