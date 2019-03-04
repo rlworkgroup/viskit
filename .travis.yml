@@ -34,6 +34,7 @@ script:
   - flake8 src --extend-ignore=D  # ignore docstrings for now
   - flake8 --exclude=src,docs --extend-ignore=D
   - pytest --cov=viskit
+  - pushd docs && make html && popd
 
 after_script:
   - coverage xml
