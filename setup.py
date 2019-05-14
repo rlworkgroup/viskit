@@ -37,9 +37,9 @@ extras['dev'] = [
 with open('README.md') as f:
     readme = f.read()
 
-# Get __version__ dynamically
-exec(open('./src/viskit/__version__.py').read())
-version = __version__  # noqa: undefined-name
+# Get the package version dynamically
+with open('VERSION') as v:
+    version = v.read().strip()
 
 setup(
     name='viskit',
