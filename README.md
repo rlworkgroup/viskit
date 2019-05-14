@@ -2,6 +2,12 @@
 [![codecov](https://codecov.io/gh/rlworkgroup/viskit/branch/master/graph/badge.svg)](https://codecov.io/gh/rlworkgroup/viskit)
 [![Docs](https://readthedocs.org/projects/viskit/badge)](http://viskit.readthedocs.org/en/latest/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rlworkgroup/viskit/blob/master/LICENSE)
+[![PyPI version](https://badge.fury.io/py/viskit.svg)](https://badge.fury.io/py/viskit)
 
 # viskit
 Hyperparameter dashboard for reinforcement learning experiments
+
+## Installation
+```shell
+pip install viskit
+```
