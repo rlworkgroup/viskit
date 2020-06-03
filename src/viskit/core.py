@@ -8,12 +8,12 @@ import numpy as np
 from viskit.misc import ext
 
 
-def unique(l):
-    return list(set(l))
+def unique(_list):
+    return list(set(_list))
 
 
-def flatten(l):
-    return [item for sublist in l for item in sublist]
+def flatten(_list):
+    return [item for sublist in _list for item in sublist]
 
 
 def load_progress(progress_csv_path):

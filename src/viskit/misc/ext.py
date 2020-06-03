@@ -67,7 +67,7 @@ class LazyDict:
         self._lazy_dict[key] = value
 
 
-def iscanl(f, l, base=None):
+def iscanl(f, l, base=None):  # noqa: E741
     started = False
     for x in l:
         if base or started:
@@ -78,7 +78,7 @@ def iscanl(f, l, base=None):
         yield base
 
 
-def iscanr(f, l, base=None):
+def iscanr(f, l, base=None):  # noqa: E741
     started = False
     for x in list(l)[::-1]:
         if base or started:
@@ -89,11 +89,11 @@ def iscanr(f, l, base=None):
         yield base
 
 
-def scanl(f, l, base=None):
+def scanl(f, l, base=None):  # noqa: E741
     return list(iscanl(f, l, base))
 
 
-def scanr(f, l, base=None):
+def scanr(f, l, base=None):  # noqa: E741
     return list(iscanr(f, l, base))
 
 
@@ -143,7 +143,7 @@ def set_seed(seed):
     np.random.seed(seed)
     try:
         if 'tensorflow' in sys.modules:
-            import tensorflow as tf
+            import tensorflow as tf  # pylint: disable=import-error
             tf.set_random_seed(seed)
     except Exception as e:
         print(e)
